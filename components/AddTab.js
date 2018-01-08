@@ -9,25 +9,30 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View, 
-  ActionSheetIOS, 
+  View,
+  ActionSheetIOS,
   Button
 } from 'react-native';
+import { connect } from 'react-redux';
+
 import ListingsApi from '../api/ListingsApi';
+import { addListing } from '../actions/listing-actions';
 import {bind} from '../utils/utils';
 
-export default class AddTab extends Component<{}> {
+const mapStateToProps = (state) => ({});
+
+class AddTab extends Component<{}> {
   constructor(props, context) {
       super(props, context);
       this.state = {
-        'title': 'Pick type', 
-        'price': 'Pick price', 
+        'title': 'Pick type',
+        'price': 'Pick price',
       }
       bind(this)('showTitleActionSheet', 'showPriceActionSheet', 'addProduct');
   }
-  
+
   showTitleActionSheet() {
-    const titles = ['backpack', 'binoculars', 'chucks', 'flippers', 'heels', 'helmet', 'lipstick', 
+    const titles = ['backpack', 'binoculars', 'chucks', 'flippers', 'heels', 'helmet', 'lipstick',
   'lipstick', 'shoes', 'sunnies', 'umbrella'];
     ActionSheetIOS.showActionSheetWithOptions({
       options: titles,
@@ -35,8 +40,8 @@ export default class AddTab extends Component<{}> {
     (titleIndex) => {
       this.setState({ title: titles[titleIndex]});
     });
-  } 
-  
+  }
+
   showPriceActionSheet() {
     const prices = ['10', '20', '30', '40', '50', '60', '80'];
     ActionSheetIOS.showActionSheetWithOptions({
@@ -45,36 +50,30 @@ export default class AddTab extends Component<{}> {
     (priceIndex) => {
       this.setState({ price: priceIndex * 10});
     });
-  } 
-  
-  addProduct() {
-    console.log(this.state.title); 
-    console.log(this.state.price);
-    ListingsApi.addListing({
-      "title": this.state.title, 
-      "price": this.state.price, 
-      "favorite": false,
-    });
   }
-  
+
+  addProduct() {
+    this.props.addListing(this.state.title, this.state.price);
+  }
+
   render() {
     return (
       <View>
-          <View style={styles.input}> 
+          <View style={styles.input}>
             <Text onPress={this.showTitleActionSheet} >{`Product Type: ${this.state.title}`} </Text>
-          </View> 
-          <View style={styles.input}> 
+          </View>
+          <View style={styles.input}>
             <Text onPress={this.showPriceActionSheet} >{`Product Type: ${this.state.price}`} </Text>
           </View>
-          <Button 
-            title='Add product' 
-            onPress={this.addProduct} 
+          <Button
+            title='Add product'
+            onPress={this.addProduct}
             color= '#4a80f5'
-            /> 
+            />
       </View>
     );
   }
-}
+};
 
 const styles = StyleSheet.create({
   input: {
@@ -90,3 +89,5 @@ const styles = StyleSheet.create({
     margin: 16,
   }
 });
+
+export default connect(mapStateToProps, { addListing })(AddTab);

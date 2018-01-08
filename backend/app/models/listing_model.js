@@ -4,7 +4,6 @@ const ListingSchema = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true,
   },
   price: {
     type: Number,

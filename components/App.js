@@ -9,7 +9,7 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View, 
+  View,
   TabBarIOS
 } from 'react-native';
 import ListingsTab from './ListingsTab';
@@ -20,15 +20,16 @@ export default class App extends Component<{}> {
   constructor(props, context) {
       super(props, context);
       this.state = {
-          selectedTab: 'listings'
+          selectedTab: 'listings',
+          newItem: false,
       };
-      bind(this)('_listingsOnPress', '_homeOnPress');
+      bind(this)('_listingsOnPress', '_homeOnPress', '_notifyNewItem');
   }
 
   _listingsOnPress() {
       this.setState({
           selectedTab: 'listings'
-      })
+      });
   }
 
   _homeOnPress() {
@@ -36,9 +37,14 @@ export default class App extends Component<{}> {
           selectedTab: 'home'
       })
   }
+
+  _notifyNewItem(newItem) {
+    this.setState({ newItem });
+  }
+
   render() {
     return (
-      <View 
+      <View
         style={styles.container}
         stickyHeaderIndices={[0]}>
       <Text style={styles.header}> SHRINE </Text>
@@ -51,14 +57,14 @@ export default class App extends Component<{}> {
                 selected={this.state.selectedTab === 'listings'}
                 systemIcon="favorites"
                 onPress={this._listingsOnPress}>
-                <ListingsTab />
+                <ListingsTab newItem={this.state.newItem} notifyNewItem={this._notifyNewItem} />
             </TabBarIOS.Item>
             <TabBarIOS.Item
                 title="Home"
                 selected={this.state.selectedTab === 'home'}
                 systemIcon="search"
                 onPress={this._homeOnPress}>
-                <AddTab />
+                <AddTab notifyNewItem={this._notifyNewItem} />
             </TabBarIOS.Item>
         </TabBarIOS>
       </View>
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5F5F5',
     paddingTop: 16,
-  }, 
+  },
   header: {
     height: 50,
     paddingTop: 30,

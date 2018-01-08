@@ -11,18 +11,20 @@ function hasProps(props, obj) {
 }
 
 export const addListing = (req, res) => {
-  if (!hasProps(['title', 'price'], req.query)) {
+  console.log('Add listing.');
+
+  if (!hasProps(['title', 'price'], req.body)) {
     res.json({ error: 'Listings need a \'title\' and a \'price\'.' });
   } else {
-    const { title, price } = req.query;
+    const { title, price } = req.body;
     const listing = new Listing();
 
     let msg = `Successfully added listing with title '${title}' and price $${price} (`;
 
     Object.assign(listing, { title, price });
 
-    if (hasProps(['favorite'], req.query)) {
-      const { favorite } = req.query;
+    if (hasProps(['favorite'], req.body)) {
+      const { favorite } = req.body;
 
       Object.assign(listing, { favorite });
 
@@ -37,7 +39,7 @@ export const addListing = (req, res) => {
 
     listing.save()
     .then(({ _id }) => {
-      res.json({ msg, id: _id });
+      res.json({ msg, listing });
     })
     .catch(err => {
       res.json({ error: err.message });
@@ -46,6 +48,7 @@ export const addListing = (req, res) => {
 };
 
 export const getListing = (req, res) => {
+  console.log('Get listing.');
   if (!hasProps(['id'], req.params)) {
     res.json({ error: 'Listing id not specified.' });
   } else {
@@ -64,6 +67,7 @@ export const getListing = (req, res) => {
 };
 
 export const getAllListings = (req, res) => {
+  console.log('Get all listings.');
   Listing.find()
   .then(listings => {
     const n = listings.length;
@@ -77,6 +81,7 @@ export const getAllListings = (req, res) => {
 };
 
 export const favoriteListing = (req, res) => {
+  console.log('Favorite listing.');
   if (!hasProps(['id'], req.params)) {
     res.json({ error: 'Listing id not specified.' });
   } else {
