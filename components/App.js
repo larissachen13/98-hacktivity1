@@ -13,6 +13,7 @@ import {
   TabBarIOS
 } from 'react-native';
 import ListingsTab from './ListingsTab';
+import AddTab from './AddTab';
 import {bind} from '../utils/utils';
 
 export default class App extends Component<{}> {
@@ -57,7 +58,7 @@ export default class App extends Component<{}> {
                 selected={this.state.selectedTab === 'home'}
                 systemIcon="search"
                 onPress={this._homeOnPress}>
-                <Text> Home </Text>
+                <AddTab />
             </TabBarIOS.Item>
         </TabBarIOS>
       </View>
