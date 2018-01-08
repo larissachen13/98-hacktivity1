@@ -10,13 +10,11 @@ router.get('/', (req, res) => {
 // on routes that end in /posts
 // ----------------------------------------------------
 router.route('/listing/')
+      .post(Listing.addListing)
       .get(Listing.getAllListings);
 
 router.route('/listing/:id')
-      .get(Listing.getListing)
-      .post(Listing.addListing);
-
-router.route('/listing/favorite/:id')
-      .put(Listing.favoriteListing);
+      .put(Listing.favoriteListing)
+      .get(Listing.getListing);
 
 export default router;
