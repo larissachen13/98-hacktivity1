@@ -8,16 +8,16 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View, 
-  FlatList, 
+  View,
+  FlatList,
 } from 'react-native';
 import Listing from './Listing.js';
 
 const renderListing = ({item}) => {
   return <Listing listing={item}/>;
 };
-const _keyExtractor = (item, index) => item.id;
-  
+const _keyExtractor = (item, index) => (item._id);
+
 const Listings = ({listings}) => {
   return (
     <FlatList
@@ -32,7 +32,7 @@ const Listings = ({listings}) => {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    alignItems: 'center', 
+    alignItems: 'center',
   },
 });
 
