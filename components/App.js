@@ -58,7 +58,6 @@ export default class App extends Component<{}> {
                 systemIcon="search"
                 onPress={this._homeOnPress}>
                 <Text> Home </Text>
-                <AddTab>
             </TabBarIOS.Item>
         </TabBarIOS>
       </View>
