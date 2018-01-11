@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import ListingsApi from '../api/ListingsApi';
 import { getAllListings } from '../actions/listing-actions';
 import Listings from './Listings';
 import {bind} from '../utils/utils';
@@ -33,7 +32,6 @@ class ListingsTab extends Component<{}> {
   }
 
   componentWillReceiveProps(props) {
-    console.log(props);
     if (Object.prototype.hasOwnProperty.call(props, 'newItem')) {
       if (props.newItem) {
         this.props.getAllListings();
@@ -47,5 +45,6 @@ class ListingsTab extends Component<{}> {
     );
   }
 };
+
 
 export default connect(mapStateToProps, { getAllListings })(ListingsTab);

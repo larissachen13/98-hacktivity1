@@ -83,10 +83,11 @@ const styles = StyleSheet.create({
   },
   header: {
     height: 50,
-    paddingTop: 30,
+    padding: 30,
     textAlign: 'center',
-    shadowOffset:{  width: 1,  height: 2,  },
+    shadowOffset:{  width: 0,  height: 2 },
     shadowColor: 'black',
-    shadowOpacity: 1,
+    shadowOpacity: .25, 
+    marginBottom: 4,
   }
 });

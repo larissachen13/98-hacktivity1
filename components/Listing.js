@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-
 import { favoriteListing } from '../actions/listing-actions';
 import heartOpaque from '../imgs/heart/HeartOpaque.png';
 import heartEmpty from '../imgs/heart/HeartEmpty.png';
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
     height: 170,
   },
   listing: {
-    height: 200,
+    height: 210,
     shadowOffset:{  width: 0,  height: 2,  },
     shadowColor: 'black',
     shadowOpacity: .24,
@@ -100,10 +99,14 @@ const styles = StyleSheet.create({
     paddingRight: 4
   },
   heart: {
-    height: 10,
-    width: 10,
+    height: 10, 
+    width: 10
   },
   heartWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingVertical: 4, 
+    paddingRight: 8,
   }
 });
 

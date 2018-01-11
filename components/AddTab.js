@@ -15,7 +15,6 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import ListingsApi from '../api/ListingsApi';
 import { addListing } from '../actions/listing-actions';
 import {bind} from '../utils/utils';
 
@@ -25,8 +24,8 @@ class AddTab extends Component<{}> {
   constructor(props, context) {
       super(props, context);
       this.state = {
-        'title': 'Pick type',
-        'price': 'Pick price',
+        'title': 'Select Type',
+        'price': 'Select Price',
       }
       bind(this)('showTitleActionSheet', 'showPriceActionSheet', 'addProduct');
   }
@@ -58,13 +57,13 @@ class AddTab extends Component<{}> {
 
   render() {
     return (
-      <View>
-          <View style={styles.input}>
-            <Text onPress={this.showTitleActionSheet} >{`Product Type: ${this.state.title}`} </Text>
-          </View>
-          <View style={styles.input}>
-            <Text onPress={this.showPriceActionSheet} >{`Product Type: ${this.state.price}`} </Text>
-          </View>
+      <View style={styles.container}>
+          <Text style={styles.input}onPress={this.showTitleActionSheet} >
+            {`Product Type: ${this.state.title}`} 
+          </Text>
+          <Text style={styles.input} onPress={this.showPriceActionSheet} >
+            {`Product Type: ${this.state.price}`} 
+          </Text>
           <Button
             title='Add product'
             onPress={this.addProduct}
@@ -76,9 +75,10 @@ class AddTab extends Component<{}> {
 };
 
 const styles = StyleSheet.create({
-  input: {
+  container : {
     flex: 1,
-    height: 100,
+  },
+  input: {
     backgroundColor: '#fff',
     paddingVertical: 8,
     paddingHorizontal: 8,

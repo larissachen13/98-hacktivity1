@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     alignItems: 'center',
+    paddingTop: 8,
   },
 });
 

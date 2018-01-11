@@ -5,7 +5,6 @@ const DEFAULT_STATE = { listings: [], error: null, msg: null, favorite: {}, acti
 const ListingReducer = (listings = DEFAULT_STATE, action) => {
   if (Object.prototype.hasOwnProperty.call(action, 'payload') &&
       Object.prototype.hasOwnProperty.call(action.payload, 'error')) {
-    console.log(action.payload.error);
     return listings;
   }
 
